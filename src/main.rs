@@ -1,16 +1,20 @@
 fn main() {
-    println!("Hello, world!");
-    let v = vec![1.0, 2.0, 4.0];
+    let v = vec![1.0, 2.0, 4.0, 3.2, 0.5, 4.2, 7.7, 8.3];
 
-    let avg = vector_average(v);
-    println!("The average is {}", avg)
+    let result = signal_change(v);
+
+    for element in result {
+        println!("The value is {}", element)
+    }
 }
 
-fn vector_average(v: Vec<f64>) -> f64 {
-    let mut sum: f64 = 0.0;
+fn signal_change(v: Vec<f64>) -> Vec<f64> {
+    let mut result_vec: Vec<f64> = Vec::new();
     let n = v.len();
+    let last_element = v[n - 1]; // v.last().unwrap().clone();       // last() borrows v.  last_element owns reference to the last element of v
+    println!("The last value is {}", last_element);
     for element in v {
-        sum += element;
+        result_vec.push(last_element - element);
     }
-    sum / (n as f64)
+    result_vec // Return value
 }
